@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import "./App.css";
 import HomePage from "./Pages/HomePage";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import PantissSdgPage from "./Pages/PantissSdgPage";
 import Header from "./Components/Common/Header";
 import WhoWeAre from "./Pages/WhoWeAre";
@@ -68,11 +68,14 @@ import Jajpur from "./Pages/WhereWeWorkPages/OdishaDistricts/Jajpur";
 import ModelMiningVillagesSolution from "./Pages/Solutions/ModelMiningVillagesSolution";
 import RepurposedMiningVillagesSolution from "./Pages/Solutions/RepurposedMiningVillagesSolution";
 
+const ContentAdmin = lazy(() => import("./Pages/ContentAdmin"));
+const TeamAdmin = lazy(() => import("./Pages/TeamAdmin"));
+
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
-  const hideHeaderFooter = location.pathname === "/sdg-pantiss";
+  const hideHeaderFooter = (location.pathname === "/sdg-pantiss" || location.pathname.startsWith("/admin/"));
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -104,6 +107,9 @@ function App() {
       <SeoManager />
       {!hideHeaderFooter && <Header />}
       <Routes>
+        <Route path="/admin" element={<Navigate to="/admin/team" replace />} />
+        <Route path="/admin/:resource" element={<Suspense fallback={<Loader />}><ContentAdmin /></Suspense>} />
+        <Route path="/admin/team" element={<Suspense fallback={<Loader />}><TeamAdmin /></Suspense>} />
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/sdg-pantiss" element={<PantissSdgPage />} />

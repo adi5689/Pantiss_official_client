@@ -10,6 +10,13 @@ const DEFAULT_KEYWORDS =
 const DEFAULT_IMAGE = SITE_URL + "/logo.png";
 
 const routeMeta = {
+  "/admin/jobs": { title: "Jobs Workspace | Pantiss Foundation", description: "Manage career opportunities." },
+  "/admin/tenders": { title: "Tenders Workspace | Pantiss Foundation", description: "Manage procurement notices." },
+  "/admin/impact": { title: "Impact Workspace | Pantiss Foundation", description: "Manage publications and impact stories." },
+  "/admin/team": {
+    title: "Team Workspace | Pantiss Foundation",
+    description: "Manage the Pantiss team directory.",
+  },
   "/": {
     title: "Pantiss Foundation | Mining Community Development NGO in India",
     description:
@@ -396,11 +403,11 @@ const SeoManager = () => {
     });
     setMeta('meta[name="robots"]', {
       name: "robots",
-      content: "index, follow, max-image-preview:large",
+      content: pathname.startsWith("/admin/") ? "noindex, nofollow" : "index, follow, max-image-preview:large",
     });
     setMeta('meta[name="googlebot"]', {
       name: "googlebot",
-      content: "index, follow, max-image-preview:large",
+      content: pathname.startsWith("/admin/") ? "noindex, nofollow" : "index, follow, max-image-preview:large",
     });
     setMeta('meta[property="og:site_name"]', {
       property: "og:site_name",

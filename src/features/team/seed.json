@@ -1,0 +1,359 @@
+[
+  {
+    "name": "Mr. Stalin Nayak",
+    "title": "Founder cum CEO",
+    "image": "/assets/teams/stalinsir.jpg",
+    "department": "founders",
+    "id": "member-1",
+    "order": 1,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Dr. Sanjaya Pradhan",
+    "title": "Co-Founder cum Principal Advisor",
+    "image": "/assets/teams/sanjay.png",
+    "department": "founders",
+    "id": "member-2",
+    "order": 2,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Kunal Anand",
+    "title": "Co-Founder cum CTO",
+    "image": "/assets/teams/kunal.png",
+    "department": "founders",
+    "id": "member-3",
+    "order": 3,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Braja Kishore Nayak",
+    "title": "Chief Financial Adsvisor",
+    "image": "/assets/teams/braja.png",
+    "department": "leadership",
+    "id": "member-4",
+    "order": 4,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Deepan Digal",
+    "title": "Deputy CEO",
+    "image": "/assets/teams/deepan.png",
+    "department": "leadership",
+    "id": "member-5",
+    "order": 5,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mrs. Indumati Nanda",
+    "title": "Additional CEO",
+    "image": "/assets/teams/indumaam.png",
+    "department": "leadership",
+    "id": "member-6",
+    "order": 6,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Priya Ranjan Das",
+    "title": "Chief Finance Officer",
+    "image": "/assets/teams/priyaranjan.png",
+    "department": "leadership",
+    "id": "member-7",
+    "order": 7,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Priya Ranjan Das",
+    "title": "Chief Finance Officer",
+    "image": "/assets/teams/priyaranjan.png",
+    "department": "finance",
+    "subDept": "Finance",
+    "id": "member-8",
+    "order": 8,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Ms. Purnima Tarei",
+    "title": "Co-Lead, Finance & Accounting",
+    "image": "/assets/teams/poonam.png",
+    "department": "finance",
+    "subDept": "Finance",
+    "id": "member-9",
+    "order": 9,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Bhuleshwar Mandal",
+    "title": "Associate, Procurement & Facilities",
+    "image": "/assets/teams/mondol.png",
+    "department": "finance",
+    "subDept": "Finance",
+    "id": "member-10",
+    "order": 10,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Basant Ku. Sahoo",
+    "title": "Lead, People, Culture and Inclusion",
+    "image": "/assets/teams/basanta.png",
+    "department": "finance",
+    "subDept": "Human Resources",
+    "id": "member-11",
+    "order": 11,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Ms. Manasi Behera",
+    "title": "Associate, Recruitment, Learning & Performance",
+    "image": "/assets/teams/manasi.jpeg",
+    "department": "finance",
+    "subDept": "Human Resources",
+    "id": "member-12",
+    "order": 12,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Jabis Ranjan Sahu",
+    "title": "Co-Lead, Digital Communications",
+    "image": "/assets/teams/jabis.png",
+    "department": "finance",
+    "subDept": "Communication",
+    "id": "member-13",
+    "order": 13,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Soumyashree Debabrata Jena",
+    "title": "Associate, Events & Campaigns",
+    "image": "/assets/teams/soumya.png",
+    "department": "finance",
+    "subDept": "Communication",
+    "id": "member-14",
+    "order": 14,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Alok Chandra Das",
+    "title": "Lead, (Planning, Policy & Governance)",
+    "image": "/assets/teams/alok.png",
+    "department": "projectManagement",
+    "id": "member-15",
+    "order": 15,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Rahul Nayak",
+    "title": "Lead, (Technical, Vocational & Educational Training)",
+    "image": "/assets/teams/rahul.png",
+    "department": "projectManagement",
+    "id": "member-16",
+    "order": 16,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Gangadhar Bej",
+    "title": "Co-Lead, (Ultra Poor Graduation (Livelihood & Enterprise))",
+    "image": "/assets/teams/gangadhar.png",
+    "department": "projectManagement",
+    "id": "member-17",
+    "order": 17,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Sudipta Kumar Behera",
+    "title": "Lead, (Health & Nutrition)",
+    "image": "/assets/teams/sudipta.png",
+    "department": "projectManagement",
+    "id": "member-18",
+    "order": 18,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Dwarka Prasad",
+    "title": "Lead, (Water & Sanitation)",
+    "image": "/assets/teams/dwarka.png",
+    "department": "projectManagement",
+    "id": "member-19",
+    "order": 19,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Yagnesh Kumar Nanda",
+    "title": "Lead, Training Compliance",
+    "image": "/assets/teams/yagnesh.png",
+    "department": "monitoring",
+    "id": "member-20",
+    "order": 20,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Ms. Jayashree Satpathy",
+    "title": "Associate, Legal Compliance",
+    "image": "/assets/teams/jayashree.png",
+    "department": "monitoring",
+    "id": "member-21",
+    "order": 21,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Ashish Kumar Mishra",
+    "title": "Lead, Capacity Building and Knowledge management",
+    "image": "/assets/teams/ashish.png",
+    "department": "knowledge",
+    "id": "member-22",
+    "order": 22,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Aditya Kumar Sahu",
+    "title": "Lead, Software Development & Data Analytics",
+    "image": "/assets/teams/aditya.png",
+    "department": "knowledge",
+    "id": "member-23",
+    "order": 23,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Rituraj Tarei",
+    "title": "Lead, Innovation & Social Good",
+    "image": "/assets/teams/rituraj.png",
+    "department": "knowledge",
+    "id": "member-24",
+    "order": 24,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Jalandhar Mohanty",
+    "title": "Lead, Jharsuguda",
+    "image": "/assets/teams/jalandhar.png",
+    "department": "region",
+    "id": "member-25",
+    "order": 25,
+    "status": "published",
+    "region": "Odisha"
+  },
+  {
+    "name": "Mr. Mukesh Singh",
+    "title": "Lead, Bokaro",
+    "image": "/assets/teams/mukessh.png",
+    "department": "region",
+    "id": "member-26",
+    "order": 26,
+    "status": "published",
+    "region": "Jharkhand"
+  },
+  {
+    "name": "Mr. Titan Sahoo",
+    "title": "Lead, Kalahandi",
+    "image": "/assets/teams/titan.png",
+    "department": "region",
+    "id": "member-27",
+    "order": 27,
+    "status": "published",
+    "region": "Odisha"
+  },
+  {
+    "name": "Mr. Tushar Ranjan Ojha",
+    "title": "Lead, Dhanbad",
+    "image": "/assets/teams/tushar.png",
+    "department": "region",
+    "id": "member-28",
+    "order": 28,
+    "status": "published",
+    "region": "Jharkhand"
+  },
+  {
+    "name": "Mr. Sudarshan Barik",
+    "title": "Lead, Jajapur",
+    "image": "/assets/teams/sudarshan.png",
+    "department": "region",
+    "id": "member-29",
+    "order": 29,
+    "status": "published",
+    "region": "Odisha"
+  },
+  {
+    "name": "Mr. Bikun Pradhan",
+    "title": "Lead, Jharsuguda",
+    "image": "/assets/teams/bikun.png",
+    "department": "region",
+    "id": "member-30",
+    "order": 30,
+    "status": "published",
+    "region": "Odisha"
+  },
+  {
+    "name": "Mr. Bikram Keshari Gouda",
+    "title": "Lead, Sundargarh",
+    "image": "/assets/teams/bikram.png",
+    "department": "region",
+    "id": "member-31",
+    "order": 31,
+    "status": "published",
+    "region": "Odisha"
+  },
+  {
+    "name": "Mr. Trupti Ranjan Samal",
+    "title": "Lead, Keonjhar",
+    "image": "/assets/teams/trupti.png",
+    "department": "region",
+    "id": "member-32",
+    "order": 32,
+    "status": "published",
+    "region": "Odisha"
+  },
+  {
+    "name": "Mr. Mantu Nayak",
+    "title": "Personal Assistance to CEO",
+    "image": "https://pantiss.com/wp-content/uploads/2022/12/Mantu-Nayak-e1670426980487.jpeg",
+    "department": "foundersOffice",
+    "id": "member-33",
+    "order": 33,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Gautam Samanta",
+    "title": "Administrative Assistant",
+    "image": "/assets/teams/gautam.jpg",
+    "department": "foundersOffice",
+    "id": "member-34",
+    "order": 34,
+    "status": "published",
+    "region": ""
+  },
+  {
+    "name": "Mr. Gandhi Beura",
+    "title": "Executive Chauffeur",
+    "image": "/assets/teams/gandhi.png",
+    "department": "foundersOffice",
+    "id": "member-35",
+    "order": 35,
+    "status": "published",
+    "region": ""
+  }
+]

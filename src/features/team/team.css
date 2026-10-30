@@ -1,0 +1,744 @@
+.team-admin,.team-directory {
+  --ta-bg: #f7f8fa;
+  --ta-surface: #fff;
+  --ta-text: #20252d;
+  --ta-muted: #727985;
+  --ta-border: #e6e8ec;
+  --ta-accent: #c92931;
+  --ta-accent-hover: #a91f27;
+  --ta-soft: #fdf0f0;
+  --ta-success: #237a50;
+  --ta-success-bg: #edf8f1;
+  --ta-shadow: 0 24px 90px #10182829;
+  --ta-overlay: #11182766;
+  --ta-radius: 14px;
+  color: var(--ta-text)
+}
+.team-admin[data-theme=dark] {
+  --ta-bg: #111317;
+  --ta-surface: #1a1e24;
+  --ta-text: #f1f2f4;
+  --ta-muted: #a5acb7;
+  --ta-border: #303640;
+  --ta-accent: #f16d75;
+  --ta-accent-hover: #f18b91;
+  --ta-soft: #362329;
+  --ta-success: #8ad6ab;
+  --ta-success-bg: #1d3529;
+  --ta-overlay: #000a
+}
+.team-admin {
+  min-height: 100vh;
+  background: var(--ta-bg);
+  font-family: Inter,system-ui,sans-serif
+}
+.team-admin * {
+  box-sizing: border-box
+}
+.team-admin button,.team-admin input,.team-admin select {
+  font: inherit
+}
+.team-admin button {
+  cursor: pointer
+}
+.team-admin button:disabled,.team-admin fieldset:disabled {
+  opacity: .55;
+  cursor: wait
+}
+.team-admin :focus-visible,.team-directory :focus-visible {
+  outline: 3px solid var(--ta-accent);
+  outline-offset: 3px
+}
+.ta-header {
+  height: 88px;
+  padding: 0 5%;
+  border-bottom: 1px solid var(--ta-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--ta-surface)
+}
+.ta-brand {
+  display: flex;
+  align-items: center;
+  font-size: 27px;
+  font-weight: 800;
+  color: var(--ta-accent);
+  text-decoration: none;
+  letter-spacing: -1.4px
+}
+.ta-brand span {
+  font-size: 18px;
+  letter-spacing: 1px
+}
+.ta-brand small {
+  font-size: 12px;
+  letter-spacing: 0;
+  color: var(--ta-muted);
+  font-weight: 500;
+  border-left: 1px solid var(--ta-border);
+  margin-left: 22px;
+  padding-left: 22px
+}
+.ta-header-actions,.ta-row-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center
+}
+.ta-button,.ta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--ta-border);
+  background: var(--ta-surface);
+  color: var(--ta-text);
+  padding: 10px 16px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .18s,transform .18s;
+  white-space: nowrap
+}
+.ta-button:hover,.ta-icon:hover {
+  background: var(--ta-bg)
+}
+.ta-primary {
+  background: var(--ta-accent);
+  border-color: var(--ta-accent);
+  color: var(--ta-surface)
+}
+.ta-primary:hover {
+  background: var(--ta-accent-hover)
+}
+.ta-quiet {
+  border-color: transparent;
+  background: transparent
+}
+.ta-icon {
+  padding: 10px
+}
+.ta-danger {
+  color: var(--ta-accent)
+}
+.ta-content {
+  max-width: 1320px;
+  margin: auto;
+  padding: 62px 5% 24px
+}
+.ta-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 34px
+}
+.ta-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--ta-muted);
+  margin: 0 0 12px
+}
+.ta-heading h1,.ta-login h1 {
+  font-size: 46px;
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -2px;
+  margin: 0 0 14px
+}
+.ta-heading h1 span {
+  color: var(--ta-accent)
+}
+.ta-heading p:last-child,.ta-login>p {
+  font-size: 14px;
+  color: var(--ta-muted);
+  line-height: 1.7
+}
+.ta-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.5fr;
+  border: 1px solid var(--ta-border);
+  border-radius: var(--ta-radius);
+  background: var(--ta-surface);
+  margin-bottom: 32px;
+  padding: 25px 8px
+}
+.ta-stats>div {
+  padding: 0 24px;
+  border-right: 1px solid var(--ta-border)
+}
+.ta-stats>div:last-child {
+  border: 0
+}
+.ta-stats span {
+  display: block;
+  color: var(--ta-muted);
+  font-size: 12px
+}
+.ta-stats strong {
+  display: block;
+  font-size: 29px;
+  font-weight: 550;
+  margin-top: 8px;
+  letter-spacing: -1px
+}
+.ta-connection {
+  display: flex;
+  align-items: center;
+  gap: 12px
+}
+.ta-connection strong {
+  font-size: 13px;
+  letter-spacing: 0;
+  margin: 0 0 6px
+}
+.ta-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ta-success);
+  flex-shrink: 0
+}
+.ta-roster {
+  background: var(--ta-surface);
+  border: 1px solid var(--ta-border);
+  border-radius: var(--ta-radius);
+  overflow: hidden
+}
+.ta-toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 20px
+}
+.ta-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  color: var(--ta-muted)
+}
+.ta-search input {
+  border: 0!important;
+  background: transparent!important;
+  max-width: 340px
+}
+.team-admin input,.team-admin select {
+  color: var(--ta-text);
+  background: var(--ta-surface);
+  border: 1px solid var(--ta-border);
+  border-radius: 8px;
+  padding: 11px 12px;
+  min-width: 0;
+  font-size: 13px
+}
+.ta-toolbar select {
+  max-width: 255px
+}
+.ta-table-wrap {
+  overflow: auto
+}
+.ta-roster table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left
+}
+.ta-roster th {
+  background: var(--ta-bg);
+  color: var(--ta-muted);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 13px 20px;
+  border-block: 1px solid var(--ta-border);
+  white-space: nowrap
+}
+.ta-roster td {
+  padding: 19px 20px;
+  border-bottom: 1px solid var(--ta-border);
+  font-size: 12px
+}
+.ta-member {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 260px
+}
+.ta-avatar {
+  width: 43px;
+  height: 43px;
+  background: var(--ta-bg);
+  border: 1px solid var(--ta-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--ta-muted)
+}
+.ta-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+.ta-member strong {
+  font-size: 13px;
+  font-weight: 600;
+  display: block
+}
+.ta-member span {
+  font-size: 11px;
+  color: var(--ta-muted);
+  display: block;
+  margin-top: 5px;
+  max-width: 280px
+}
+.ta-department {
+  display: block;
+  font-size: 12px
+}
+.ta-roster small {
+  display: block;
+  color: var(--ta-muted);
+  margin-top: 4px
+}
+.ta-badge {
+  display: inline-flex;
+  padding: 5px 9px;
+  border-radius: 6px;
+  font-size: 10px;
+  background: var(--ta-bg);
+  color: var(--ta-muted);
+  border: 1px solid var(--ta-border)
+}
+.ta-badge.published {
+  color: var(--ta-success);
+  background: var(--ta-success-bg);
+  border-color: transparent
+}
+.ta-table-footer {
+  padding: 17px 20px;
+  font-size: 11px;
+  color: var(--ta-muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px
+}
+.ta-empty {
+  padding: 65px 20px;
+  text-align: center;
+  color: var(--ta-muted)
+}
+.ta-empty svg {
+  margin: auto auto 20px
+}
+.ta-empty h2 {
+  font-size: 21px;
+  color: var(--ta-text);
+  margin-bottom: 10px
+}
+.ta-empty p {
+  font-size: 13px;
+  margin-bottom: 22px
+}
+.ta-footnote {
+  text-align: center;
+  color: var(--ta-muted);
+  font-size: 11px;
+  margin: 28px
+}
+.ta-alert,.ta-success {
+  border: 1px solid var(--ta-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.6;
+  background: var(--ta-soft);
+  color: var(--ta-accent)
+}
+.ta-success {
+  display: flex;
+  gap: 10px;
+  background: var(--ta-success-bg);
+  color: var(--ta-success)
+}
+.ta-login {
+  max-width: 430px;
+  margin: 80px auto;
+  padding: 0 24px
+}
+.ta-symbol {
+  display: grid;
+  place-items: center;
+  background: var(--ta-soft);
+  color: var(--ta-accent);
+  width: 58px;
+  height: 58px;
+  border-radius: 17px;
+  margin-bottom: 30px
+}
+.ta-login form {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px
+}
+.ta-login label,.ta-fields label {
+  font-size: 12px;
+  font-weight: 550
+}
+.ta-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ta-muted);
+  font-size: 12px;
+  margin-top: 30px
+}
+.ta-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--ta-overlay);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px
+}
+.ta-dialog {
+  background: var(--ta-surface);
+  border: 1px solid var(--ta-border);
+  border-radius: 20px;
+  padding: 28px;
+  width: 620px;
+  max-height: 90dvh;
+  overflow: auto;
+  box-shadow: var(--ta-shadow)
+}
+.ta-dialog-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 24px
+}
+.ta-dialog h2 {
+  font-size: 25px;
+  letter-spacing: -.7px;
+  font-weight: 600
+}
+.ta-dialog>p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ta-muted)
+}
+.ta-fields {
+  display: grid;
+  gap: 17px;
+  padding: 0;
+  margin: 0;
+  border: 0
+}
+.ta-fields label {
+  display: grid;
+  gap: 8px
+}
+.ta-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px
+}
+.ta-photo-edit {
+  display: flex;
+  align-items: center;
+  gap: 16px
+}
+.ta-avatar-large {
+  width: 76px;
+  height: 84px
+}
+.ta-upload {
+  position: relative;
+  display: flex!important;
+  align-items: center;
+  gap: 8px!important;
+  overflow: hidden;
+  cursor: pointer
+}
+.ta-upload input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%
+}
+.ta-upload:focus-within {
+  outline: 3px solid var(--ta-accent)
+}
+.ta-photo-edit small {
+  display: block;
+  color: var(--ta-muted);
+  font-size: 10px;
+  margin-top: 9px
+}
+.ta-hint {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--ta-muted);
+  padding: 12px;
+  background: var(--ta-bg);
+  border-radius: 8px
+}
+.ta-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid var(--ta-border);
+  margin-top: 24px;
+  padding-top: 20px
+}
+.ta-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0)
+}
+.team-directory {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 80px
+}
+.team-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 40px
+}
+.team-tabs button {
+  background: var(--ta-bg);
+  color: var(--ta-text);
+  border: 1px solid var(--ta-border);
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 12px;
+  transition: background .2s
+}
+.team-tabs button[aria-pressed=true] {
+  background: var(--ta-accent);
+  color: var(--ta-surface);
+  border-color: var(--ta-accent)
+}
+.team-group {
+  margin-top: 30px
+}
+.team-group h2 {
+  font-size: 25px;
+  margin-bottom: 20px;
+  color: var(--ta-accent);
+  font-weight: 600
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 28px
+}
+.team-person {
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--ta-border);
+  background: var(--ta-surface)
+}
+.team-photo {
+  aspect-ratio: 4/5;
+  position: relative;
+  background: var(--ta-bg);
+  display: grid;
+  place-items: center;
+  overflow: hidden
+}
+.team-photo img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter .3s,transform .3s
+}
+.team-person:hover img {
+  filter: grayscale(0);
+  transform: scale(1.025)
+}
+.team-photo span {
+  font-size: 48px;
+  color: var(--ta-muted)
+}
+.team-person-copy {
+  background: var(--ta-accent);
+  color: var(--ta-surface);
+  padding: 22px;
+  min-height: 108px
+}
+.team-person h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 7px
+}
+.team-person p {
+  font-size: 13px;
+  line-height: 1.6
+}
+.team-skeleton {
+  aspect-ratio: 4/6;
+  border-radius: 12px;
+  background: var(--ta-bg);
+  animation: team-pulse 1.2s ease-in-out infinite alternate
+}
+.team-notice,.team-empty {
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+  padding: 20px;
+  color: var(--ta-muted)
+}
+.team-notice button {
+  text-decoration: underline;
+  color: var(--ta-accent)
+}
+@keyframes team-pulse {
+  to {
+    opacity: .4
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .team-skeleton {
+    animation: none
+  }
+  .team-admin *,.team-directory * {
+    transition: none!important
+  }
+}
+@media(max-width:850px) {
+  .ta-stats {
+    grid-template-columns: repeat(3,1fr)
+  }
+  .ta-connection {
+    grid-column: 1/-1;
+    margin-top: 22px;
+    padding-top: 18px!important;
+    border-top: 1px solid var(--ta-border)!important
+  }
+  .ta-stats>div:nth-child(3) {
+    border-right: 0
+  }
+  .ta-header {
+    padding: 0 20px
+  }
+  .ta-brand small {
+    display: none
+  }
+  .ta-content {
+    padding: 35px 20px
+  }
+  .ta-heading h1 {
+    font-size: 38px
+  }
+  .ta-toolbar {
+    flex-wrap: wrap
+  }
+  .ta-search {
+    flex-basis: 100%
+  }
+  .ta-toolbar select {
+    flex: 1;
+    max-width: 100%
+  }
+  .team-grid {
+    gap: 16px
+  }
+  .ta-table-footer span {
+    display: none
+  }
+}
+@media(max-width:560px) {
+  .ta-header {
+    height: 72px
+  }
+  .ta-header-actions {
+    gap: 0
+  }
+  .ta-header-actions .ta-button {
+    font-size: 10px;
+    padding: 8px
+  }
+  .ta-heading {
+    align-items: flex-start
+  }
+  .ta-heading p:last-child {
+    max-width: 210px;
+    font-size: 12px
+  }
+  .ta-heading>.ta-button {
+    font-size: 11px;
+    padding: 10px
+  }
+  .ta-stats>div {
+    padding: 0 14px
+  }
+  .ta-stats strong {
+    font-size: 24px
+  }
+  .ta-overlay {
+    padding: 10px
+  }
+  .ta-dialog {
+    padding: 22px 18px;
+    border-radius: 14px
+  }
+  .ta-form-grid {
+    grid-template-columns: 1fr
+  }
+  .team-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px
+  }
+  .team-person-copy {
+    padding: 13px;
+    min-height: 120px
+  }
+  .team-person h3 {
+    font-size: 14px
+  }
+  .team-person p {
+    font-size: 11px
+  }
+  .team-directory {
+    padding: 35px 16px
+  }
+  .team-tabs button {
+    font-size: 11px;
+    padding: 8px 10px
+  }
+}
+/* The public site applies a global 80% zoom; the workspace uses native sizing. */
+html:has(.team-admin) {
+  zoom: 1
+}
+
+/* Keep offscreen accessible action labels within the scrollable table. */
+.ta-table-wrap {
+  position: relative;
+  max-width: 100%;
+}
+
+@media (max-width: 560px) {
+  .ta-stats .ta-connection strong {
+    font-size: 13px;
+    letter-spacing: 0;
+  }
+}

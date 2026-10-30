@@ -7,7 +7,9 @@ import {
   FileText,
   MapPin,
 } from "lucide-react";
-import { getTendersByStatus, tenders } from "../../data/tenders";
+import { useContent } from "../../features/content/useContent";
+import ContentState from "../../features/content/ContentState";
+import { isOpen, displayDate } from "../../features/content/model";
 
 const PREVIEW_LIMIT = 4;
 
@@ -43,6 +45,7 @@ const renderTenderCard = (tender) => {
         {tender.title}
       </h3>
 
+      {tender.description && <p className="mb-5 text-sm leading-6 text-gray-600">{tender.description}</p>}
       <dl className="mt-auto space-y-3 border-t border-gray-100 pt-5 text-sm">
         <div className="flex items-center gap-3 text-gray-600">
           <CalendarDays className="shrink-0 text-gray-400" size={17} aria-hidden="true" />
@@ -76,8 +79,10 @@ const renderTenderCard = (tender) => {
 };
 
 const TendersListing = () => {
+  const {records,loading,error,retry} = useContent('tenders');
+  const tenders = records.map(t=>({...t,status:isOpen(t)?'open':'closed',startDate:displayDate(t.startDate),deadline:displayDate(t.deadline)}));
   const [activeTab, setActiveTab] = useState("open");
-  const filteredTenders = getTendersByStatus(activeTab);
+  const filteredTenders = tenders.filter(t=>t.status===activeTab);
   const visibleTenders = filteredTenders.slice(0, PREVIEW_LIMIT);
 
   const changeTab = (tabId) => {
@@ -102,7 +107,7 @@ const TendersListing = () => {
 
           <div
             className="inline-flex w-full rounded-xl border border-gray-200 bg-white p-1 shadow-sm sm:w-auto"
-            role="tablist"
+            role="group"
             aria-label="Tender status"
           >
             {tabs.map((tab) => {
@@ -115,9 +120,8 @@ const TendersListing = () => {
                 <button
                   key={tab.id}
                   type="button"
-                  role="tab"
                   id={`${tab.id}-tab`}
-                  aria-selected={isActive}
+                  aria-pressed={isActive}
                   aria-controls={`${tab.id}-panel`}
                   onClick={() => changeTab(tab.id)}
                   className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold tracking-wide transition focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 sm:flex-none ${
@@ -144,10 +148,11 @@ const TendersListing = () => {
 
         <div
           id={`${activeTab}-panel`}
-          role="tabpanel"
+          role="region"
           aria-labelledby={`${activeTab}-tab`}
         >
-          {visibleTenders.length > 0 ? (
+          <ContentState loading={loading} error={error} retry={retry} />
+          {loading || error ? null : visibleTenders.length > 0 ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
               {visibleTenders.map(renderTenderCard)}
             </div>
@@ -157,7 +162,7 @@ const TendersListing = () => {
                 <FileText size={24} aria-hidden="true" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900">
-                No open tenders right now
+                No {activeTab} tenders right now
               </h3>
               <p className="mt-2 max-w-md text-gray-600">
                 New procurement opportunities will appear here when they are

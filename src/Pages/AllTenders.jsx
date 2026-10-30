@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { ArrowLeft, ExternalLink, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
-import { tenders } from "../data/tenders";
+import { useContent } from "../features/content/useContent";
+import ContentState from "../features/content/ContentState";
+import { isOpen, displayDate } from "../features/content/model";
 
 const filters = [
   { id: "all", label: "All" },
@@ -10,6 +12,8 @@ const filters = [
 ];
 
 const AllTenders = () => {
+  const {records,loading,error,retry} = useContent('tenders');
+  const tenders = records.map(t=>({...t,status:isOpen(t)?'open':'closed',startDate:displayDate(t.startDate),deadline:displayDate(t.deadline)}));
   const [activeFilter, setActiveFilter] = useState("all");
   const filteredTenders =
     activeFilter === "all"
@@ -90,7 +94,8 @@ const AllTenders = () => {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
+          <ContentState loading={loading} error={error} retry={retry} />
+          <div hidden={loading || Boolean(error)} className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[900px] border-collapse text-left">
                 <caption className="sr-only">
@@ -112,6 +117,7 @@ const AllTenders = () => {
                       <tr key={tender.id} className="transition hover:bg-red-50/40">
                         <th scope="row" className="max-w-md px-5 py-5 text-sm font-semibold leading-6 text-neutral-950">
                           {tender.title}
+                          {tender.description && <p className="mt-2 text-sm font-normal text-neutral-600">{tender.description}</p>}
                         </th>
                         <td className="whitespace-nowrap px-5 py-5 text-sm text-neutral-600">{tender.location}</td>
                         <td className="whitespace-nowrap px-5 py-5 text-sm text-neutral-600">{tender.startDate}</td>

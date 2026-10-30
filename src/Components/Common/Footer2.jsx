@@ -139,6 +139,12 @@ const Footer2 = () => {
             <Link to="/careers" className="hover:underline hover:text-red-600">
               Careers
             </Link>
+            <Link
+              to="/admin/team"
+              className="rounded-sm hover:underline hover:text-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
+            >
+              Admin Login
+            </Link>
           </div>
 
           {/* Social Media Section */}

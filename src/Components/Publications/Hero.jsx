@@ -1,4 +1,3 @@
-import React from "react";
 
 const Hero = () => {
   return (
@@ -55,7 +54,7 @@ const Hero = () => {
             {/* Buttons */}
             <div className="flex flex-wrap gap-4">
 
-              <button
+              <a href="#impact-library"
                 className="
                   px-7 py-3
                   bg-red-600
@@ -68,21 +67,9 @@ const Hero = () => {
                 "
               >
                 Browse Publications
-              </button>
+              </a>
 
-              <button
-                className="
-                  px-7 py-3
-                  rounded-lg
-                  border border-white/30
-                  backdrop-blur-md
-                  text-white
-                  hover:bg-white/10
-                  transition
-                "
-              >
-                Latest Report →
-              </button>
+
 
             </div>
 
