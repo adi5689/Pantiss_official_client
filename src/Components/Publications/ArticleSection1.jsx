@@ -1,42 +1,17 @@
-import React, { useState, useEffect, useMemo, memo } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect, useMemo, memo } from "react";
 import Heading from "../Common/Heading";
 import { motion, AnimatePresence } from "framer-motion";
 
-const articles = [
-  {
-    title:
-      "What is the difference between Theory of Change and Logical Framework?",
-    description:
-      "Learn about the difference between the two most commonly used Monitoring and Evaluation frameworks.",
-    imageUrl: "/News/logic.jpg",
-    date: "March 2026",
-  },
-  {
-    title:
-      "Using visual tools and data analytics to track progress and undertake course corrective actions",
-    imageUrl: "/News/analytics.jpg",
-    date: "Feb 2026",
-  },
-  {
-    title:
-      "Community-based research for participatory and inclusive program implementation",
-    imageUrl: "/News/inclusivity.jpg",
-    date: "Jan 2026",
-  },
-  {
-    title: "5 Things to Consider when using SROI",
-    imageUrl: "/News/sroi.jpg",
-    date: "Dec 2025",
-  },
-];
+
 
 // Memoized list card
 const SideCard = memo(({ article, onClick }) => (
-  <motion.div
+  <motion.button type="button"
     onClick={onClick}
     whileHover={{ y: -4, scale: 1.02 }}
     className="
-      flex gap-4
+      text-left flex gap-4
       rounded-xl
       overflow-hidden
       cursor-pointer
@@ -65,14 +40,17 @@ const SideCard = memo(({ article, onClick }) => (
         {article.title}
       </h3>
     </div>
-  </motion.div>
+  </motion.button>
 ));
 
-const ArticleSection1 = () => {
+SideCard.displayName = "ImpactInsightCard";
+
+const ArticleSection1 = ({ articles = [], onOpen }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Auto rotate (pause when tab hidden)
   useEffect(() => {
+    if (articles.length < 2) return;
     const interval = setInterval(() => {
       if (!document.hidden) {
         setActiveIndex((prev) => (prev + 1) % articles.length);
@@ -80,16 +58,17 @@ const ArticleSection1 = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [articles.length]);
 
-  const activeArticle = articles[activeIndex];
+  const activeArticle = articles[activeIndex % articles.length];
 
   // Memo side articles
   const sideArticles = useMemo(
     () => articles.filter((_, i) => i !== activeIndex),
-    [activeIndex]
+    [activeIndex, articles]
   );
 
+  if (!articles.length) return null;
   return (
     <section className="bg-red-600 py-16 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -178,7 +157,7 @@ const ArticleSection1 = () => {
 
         {/* View More */}
         <div className="flex justify-center items-center mt-10">
-          <button
+          <button onClick={() => onOpen(activeArticle)}
             className="
               px-6 py-3
               bg-white

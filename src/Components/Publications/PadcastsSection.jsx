@@ -1,27 +1,13 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import Heading from "../Common/Heading";
 
-const VideoSectionWithPopup = () => {
+const VideoSectionWithPopup = ({ videos = [], onOpen, onBrowse }) => {
   const [activeVideo, setActiveVideo] = useState(null);
 
-  const videos = [
-    {
-      id: "1",
-      title: "Ending Plastic Waste",
-      youtubeId: "8Q6e48uWuv0", // replace with real ID
-    },
-    {
-      id: "2",
-      title: "ROJGAR | କେମିତି ହୋଇପାରିବେ ଉଦ୍ୟୋଗୀ ? ",
-      youtubeId: "AvEdtIwqA4M", // replace with real ID
-    },
-    {
-      id: "3",
-      title: "Youth4Water Plus Champions of Climate Action in Odisha Episode 03 : Stalin Nayak",
-      youtubeId: "QWntmrXp7fQ", // replace with real ID
-    },
-  ];
 
+
+  if (!videos.length) return null;
   return (
     <section className="bg-red-600 py-10 px-6">
       <div className="container mx-auto">
@@ -32,14 +18,14 @@ const VideoSectionWithPopup = () => {
           {videos.map((video) => (
             <button
               key={video.id}
-              onClick={() => setActiveVideo(video.youtubeId)}
+              onClick={() => video.youtubeId ? setActiveVideo(video.youtubeId) : onOpen(video)}
               className="group bg-white rounded-xl shadow-lg overflow-hidden text-left
                          hover:shadow-2xl transition-all duration-300"
             >
               {/* Thumbnail */}
               <div className="relative aspect-video bg-black">
                 <img
-                  src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                  src={video.imageUrl || `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
                   alt={video.title}
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -73,7 +59,7 @@ const VideoSectionWithPopup = () => {
 
         {/* View More */}
         <div className="flex justify-center items-center mt-10">
-          <button
+          <button onClick={onBrowse}
             className="
               px-6 py-3
               bg-white

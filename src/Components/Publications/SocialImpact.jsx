@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect, memo } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useRef, useEffect, memo } from "react";
 import Heading from "../Common/Heading";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,17 +15,10 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-const reports = [
-  { title: "Industry 4.0 Readiness of Vocational Training", cover: "/Reports/Industry_4.jpg" },
-  { title: "Future Workforce Needs in Mining Sector", cover: "/Reports/Future_workforce_needs.jpg" },
-  { title: "Women Participation in Industrial Skilling Programs", cover: "/Reports/Women_participation.jpg" },
-  { title: "Livelihood Conditions in Mining Affected Communities", cover: "/Reports/livelihood_conditions_in_mining_affected_community.jpg" },
-  { title: "Renewable Energy Workforce Opportunities for Rural Youth", cover: "/Reports/renewable_energy.jpg" },
-  { title: "Climate Resilient Livelihood Models", cover: "/Reports/Climate_resilient.jpg" },
-];
+
 
 // Memoized Slide (prevents re-renders)
-const ReportCard = memo(({ report }) => (
+const ReportCard = memo(({ report, onOpen }) => (
   <div className="group relative rounded-2xl overflow-hidden shadow-xl will-change-transform">
 
     <img
@@ -58,7 +52,7 @@ const ReportCard = memo(({ report }) => (
       transition
       flex items-center justify-center
     ">
-      <button className="px-5 py-2 rounded-full bg-white text-red-600 font-semibold shadow hover:scale-105 transition">
+      <button onClick={() => onOpen(report)} className="px-5 py-2 rounded-full bg-white text-red-600 font-semibold shadow hover:scale-105 transition">
         👁 View Report
       </button>
     </div>
@@ -66,7 +60,9 @@ const ReportCard = memo(({ report }) => (
   </div>
 ));
 
-const SocialImpact = () => {
+ReportCard.displayName = "ImpactReportCard";
+
+const SocialImpact = ({ reports = [], onOpen, onBrowse }) => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -87,6 +83,7 @@ const SocialImpact = () => {
     return () => observer.disconnect();
   }, []);
 
+  if (!reports.length) return null;
   return (
     <section
       ref={sectionRef}
@@ -109,7 +106,7 @@ const SocialImpact = () => {
             and community impact.
           </p>
 
-          <button className="mt-8 px-6 py-3 bg-white text-red-600 rounded-lg font-semibold shadow hover:bg-black hover:text-white transition">
+          <button onClick={onBrowse} className="mt-8 px-6 py-3 bg-white text-red-600 rounded-lg font-semibold shadow hover:bg-black hover:text-white transition">
             View All Reports →
           </button>
 
@@ -124,7 +121,7 @@ const SocialImpact = () => {
               centeredSlides
               grabCursor
               slidesPerView={"auto"}
-              loop
+              loop={reports.length > 2}
               speed={700}
               autoplay={{
                 delay: 3000,
@@ -147,7 +144,7 @@ const SocialImpact = () => {
             >
               {reports.map((report, index) => (
                 <SwiperSlide key={index} style={{ width: "300px" }}>
-                  <ReportCard report={report} />
+                  <ReportCard report={report} onOpen={onOpen} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -176,7 +173,7 @@ const SocialImpact = () => {
       </div>
 
       {/* Pagination Style */}
-      <style jsx global>{`
+      <style>{`
         .custom-pagination .swiper-pagination-bullet {
           width: 8px;
           height: 8px;

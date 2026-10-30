@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 const FeaturedPublicationBanner = () => {
   const bannerRef = useRef(null);

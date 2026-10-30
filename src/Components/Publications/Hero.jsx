@@ -68,6 +68,9 @@ const Hero = () => {
               >
                 Browse Publications
               </a>
+              <a href="#impact-reports" className="px-7 py-3 rounded-lg border border-white/30 backdrop-blur-md text-white hover:bg-white/10 transition">
+                Latest Report →
+              </a>
 
 
 

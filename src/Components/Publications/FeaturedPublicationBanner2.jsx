@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+/* eslint-disable react/prop-types */
+import { useRef } from "react";
 
-const FeaturedPublicationBanner2 = () => {
+const FeaturedPublicationBanner2 = ({ onOpen }) => {
   const bannerRef = useRef(null);
 
   return (
@@ -26,11 +27,11 @@ const FeaturedPublicationBanner2 = () => {
             Our Programs Impact Assessment Report
           </h2>
           <p className="text-md md:text-lg text-gray-200 mb-4">
-            Evaluating our initiatives' transformative effects on communities
+            Evaluating our initiatives’ transformative effects on communities
             and environments.
           </p>
         </div>
-        <button className="px-6 py-2 bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 md:ml-4">
+        <button onClick={onOpen} className="px-6 py-2 bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 md:ml-4">
           View Report
         </button>
       </div>

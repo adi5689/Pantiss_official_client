@@ -1,41 +1,11 @@
+/* eslint-disable react/prop-types */
 // FactSheetsSection.js
-import React from "react";
 import Heading from "../Common/Heading";
 
-const factSheetItems = [
-  {
-    title: "Mining-Affected Communities – Odisha",
-    description:
-      "A data-driven overview of socio-economic, livelihood, and environmental conditions in mining-affected regions of Odisha. Covers displacement trends, employment patterns, and community well-being indicators.",
-    date: "Releasing Soon",
-    imageUrl:
-      "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=800&auto=format&fit=crop&q=60",
-    exploreUrl: "#",
-    comingSoon: true,
-  },
-  {
-    title: "Skill Development & Employability Snapshot",
-    description:
-      "Key statistics and insights on skilling outcomes, workforce readiness, and placement trends across industrial and infrastructure sectors, with a focus on youth and tribal communities.",
-    date: "Releasing Soon",
-    imageUrl:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=60",
-    exploreUrl: "#",
-    comingSoon: true,
-  },
-  {
-    title: "Just Transition Indicators Framework",
-    description:
-      "A concise factsheet outlining core indicators for monitoring just transition outcomes, including livelihoods, social protection, gender inclusion, and local economic resilience.",
-    date: "Releasing Soon",
-    imageUrl:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60",
-    exploreUrl: "#",
-    comingSoon: true,
-  },
-];
 
-const FactSheetsSection = () => {
+
+const FactSheetsSection = ({ factSheetItems = [], onOpen, onBrowse }) => {
+  if (!factSheetItems.length) return null;
   return (
     <section className="bg-white py-10 px-6">
       <div className="container mx-auto max-w-7xl">
@@ -98,6 +68,7 @@ const FactSheetsSection = () => {
 
                   <a
                     href={item.comingSoon ? undefined : item.exploreUrl}
+                    onClick={e => { e.preventDefault(); onOpen(item); }}
                     aria-disabled={item.comingSoon}
                     className={`inline-flex items-center px-4 py-2 text-sm font-semibold rounded-full shadow-md transition-all
                       ${
@@ -131,7 +102,7 @@ const FactSheetsSection = () => {
 
         {/* View All */}
         <div className="flex justify-center items-center mt-10">
-          <button
+          <button onClick={onBrowse}
             className="
               px-6 py-3
               bg-red-600

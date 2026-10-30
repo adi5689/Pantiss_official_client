@@ -1,38 +1,11 @@
+/* eslint-disable react/prop-types */
 // CommunicationDevelopment.js
-import React from "react";
 import Heading from "../Common/Heading";
 
-const dashboards = [
-  {
-    title: "Results Dashboard",
-    description:
-      "Track and analyze the outcomes of our initiatives in real-time. This dashboard provides detailed metrics, visualizations, and performance indicators to help stakeholders understand the impact of our programs across various regions and sectors.",
-    date: "Updated: March 1, 2025",
-    imageUrl:
-      "/assets/publications/results.png",
-    exploreUrl: "/dashboard/results", // Replace with actual dashboard URL
-  },
-  {
-    title: "Partnerships Dashboard",
-    description:
-      "Explore our network of collaborators and their contributions. This tool offers insights into partnership dynamics, joint projects, resource sharing, and the collective impact of our alliances on community development and innovation.",
-    date: "Updated: February 15, 2025",
-    imageUrl:
-      "/assets/publications/partnerships.png",
-    exploreUrl: "/dashboard/partnerships", // Replace with actual dashboard URL
-  },
-  {
-    title: "Key Result Stories Dashboard",
-    description:
-      "Dive into impactful stories showcasing our key achievements. This dashboard highlights success narratives, beneficiary testimonials, and data-driven outcomes that illustrate the transformative effects of our work over the past year.",
-    date: "Updated: January 10, 2025",
-    imageUrl:
-      "/assets/publications/Key_results.png",
-    exploreUrl: "/dashboard/key-result-stories", // Replace with actual dashboard URL
-  },
-];
 
-const CommunicationDevelopment = () => {
+
+const CommunicationDevelopment = ({ dashboards = [], onOpen, onBrowse }) => {
+  if (!dashboards.length) return null;
   return (
     <section className="bg-white py-10 px-6">
       <div className="container mx-auto max-w-7xl">
@@ -75,7 +48,8 @@ const CommunicationDevelopment = () => {
                     {dashboard.date}
                   </span>
                   <a
-                    href={dashboard.exploreUrl}
+                    href={dashboard.exploreUrl || undefined}
+                    onClick={e => { e.preventDefault(); onOpen(dashboard); }}
                     className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm font-semibold rounded-full shadow-md hover:from-red-600 hover:to-red-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-red-300"
                     aria-label={`Explore ${dashboard.title}`}
                   >
@@ -103,7 +77,7 @@ const CommunicationDevelopment = () => {
 
         {/* View More */}
         <div className="flex justify-center items-center mt-8">
-          <button
+          <button onClick={onBrowse}
             className="
               px-6 py-3
               bg-red-600
