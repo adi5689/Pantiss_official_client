@@ -4,12 +4,14 @@ The existing Google OAuth account, spreadsheet and Drive folder are reused. No n
 
 ## Admin pages
 
+`/admin/login` is the shared sign-in for every section. Choose the section to open after signing in. Direct section links show the same login when signed out, and the footer Admin Login shortcut opens this shared entry.
+
 - `/admin/team`: members and photos.
 - `/admin/jobs`: careers postings.
 - `/admin/tenders`: procurement notices and PDFs.
 - `/admin/impact`: articles, dashboards, reports, publications, videos, podcasts and fact sheets.
 
-Sign in once at `/admin/team` with `TEAM_ADMIN_PASSWORD`, then switch sections using the workspace navigation. Sessions are shared across these sections using the existing API. Changes become visible on the next public page load, without a rebuild.
+Sign in once at `/admin/login` with `TEAM_ADMIN_PASSWORD`, then switch sections using the workspace navigation. Sessions are shared across these sections using the existing API. Changes become visible on the next public page load, without a rebuild.
 
 ## Worksheets
 

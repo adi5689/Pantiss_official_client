@@ -22,7 +22,7 @@ Open `/admin/team` to manage the team. The public page remains at `/whoweare/tea
    - `GOOGLE_TEAM_DRIVE_FOLDER_ID`: the ID after `/folders/` in the Drive folder URL.
 
    **Never use a `VITE_` prefix for these values. Never commit real credentials.**
-6. Restart `npm run dev`, or redeploy Vercel after changing settings. Sign in at `/admin/team`. For an empty worksheet, choose **Import existing roster** once to preserve all existing members and photos. Existing local photo URLs remain valid; replacing a photo uploads it to Drive.
+6. Restart `npm run dev`, or redeploy Vercel after changing settings. Sign in at `/admin/login`, then choose Team. For an empty worksheet, choose **Import existing roster** once to preserve all existing members and photos. Existing local photo URLs remain valid; replacing a photo uploads it to Drive.
 
 ## Editing
 

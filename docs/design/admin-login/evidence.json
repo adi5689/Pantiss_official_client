@@ -1,0 +1,73 @@
+{
+  "contract": "contract.md: shared Pantiss login and all four authenticated workspaces; actual logo, shared section chooser, protected existing API, responsive sidebar/tables/editors.",
+  "targetViewports": [
+    "1280x720",
+    "390x844"
+  ],
+  "accessibility": {
+    "status": "pass",
+    "evidence": "Browser checks: empty required password focuses the input; incorrect password is linked by aria-describedby=auth-login-error and aria-invalid=true; Tab reaches Show password with a visible solid outline; native dialog Escape now restores focus to Add job posting. Real logo decoded. Muted token contrast increased in both themes; reduced-motion uses existing important transition override."
+  },
+  "responsive": {
+    "status": "pass",
+    "evidence": "Rendered login and tenders workspace at 1280x720 and 390x844. Mobile document scrollWidth equals 390. Desktop sidebar becomes horizontally scrollable mobile navigation; tables scroll within their container. Long tender titles wrap. Mobile submit measures 56px high. Two-column desktop editor keeps Save draft within 720px viewport."
+  },
+  "contentStates": {
+    "loading": {
+      "status": "pass",
+      "evidence": "Observed Signing in… with password, section chooser and submit disabled during the mock login request."
+    },
+    "empty": {
+      "status": "pass",
+      "evidence": "Submitting an empty password produced native required validation and focused the input. A no-matching-test-result search displayed No matching items with a recovery suggestion."
+    },
+    "error": {
+      "status": "pass",
+      "evidence": "Incorrect mock password displayed Incorrect password.; input aria-invalid=true and aria-describedby points to auth-login-error. A correct password then succeeded."
+    },
+    "partial": {
+      "status": "pass",
+      "evidence": "Disconnected-storage fixture kept section navigation available and displayed an administrator-directed connection message without empty counts or editing actions."
+    },
+    "success": {
+      "status": "pass",
+      "evidence": "Selected Tenders before signing in with disposable mock credentials; browser navigated to /admin/tenders and displayed records. Theme persisted when switching to Job postings. Sign-out returned to the shared login with Job postings selected."
+    },
+    "permission": {
+      "status": "pass",
+      "evidence": "authConfigured=false fixture displayed the contact-administrator message and disabled the password and submit controls."
+    }
+  },
+  "renderedEvidence": [
+    {
+      "viewport": "1280x720",
+      "artifact": "login-desktop.png",
+      "observation": "Shared login with real logo, all four functional destinations and a compact sign-in form."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "login-mobile.png",
+      "observation": "Mobile login with real logo, two-column destination chooser and submit visible without horizontal overflow."
+    },
+    {
+      "viewport": "1280x720",
+      "artifact": "workspace-desktop.png",
+      "observation": "Tenders workspace: sidebar, real logo header, summary cards, searchable table and status toggles with long titles."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "workspace-mobile.png",
+      "observation": "Mobile workspace: compact navigation and summary cards; table contained within a horizontal scroll area."
+    },
+    {
+      "viewport": "1280x720",
+      "artifact": "editor-desktop.png",
+      "observation": "Two-column job editor with scrollable fields and visible Save draft and Cancel actions."
+    },
+    {
+      "viewport": "1280x720",
+      "artifact": "storage-disconnected.png",
+      "observation": "Authenticated partial-configuration state gives a clear recovery instruction."
+    }
+  ]
+}

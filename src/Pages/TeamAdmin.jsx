@@ -1,9 +1,12 @@
+import { useAdminTheme } from '../features/admin/useAdminTheme';
+import AdminLogin from '../features/admin/AdminLogin';
+import AdminHeader from '../features/admin/AdminHeader';
+import '../features/admin/admin-workspace.css';
 import { prepareUpload } from '../features/content/upload';
 import AdminNav from '../features/content/AdminNav';
 import '../features/content/content.css';
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowUpRight, Check, ImagePlus, LogOut, Plus, Search, Users, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Check, ImagePlus, Plus, Search, Users, X } from 'lucide-react';
 import { departments, imageUrl, subDepartments, validateMember } from '../features/team/model';
 import { teamRequest } from '../features/team/api';
 import '../features/team/team.css';
@@ -19,7 +22,6 @@ const blank = {
 };
 export default function TeamAdmin() {
   const [session, setSession] = useState(null);
-  const [password, setPassword] = useState('');
   const [members, setMembers] = useState([]);
   const [query, setQuery] = useState('');
   const [department, setDepartment] = useState('all');
@@ -28,7 +30,7 @@ export default function TeamAdmin() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useAdminTheme();
   const editor = useRef(null);
   const trigger = useRef(null);
   const load = async () => {
@@ -64,16 +66,6 @@ export default function TeamAdmin() {
     } finally {
       setBusy(false);
     }
-  };
-  const login = e => {
-    e.preventDefault();
-    run(async () => {
-      await teamRequest('login', {
-        password
-      });
-      setPassword('');
-      setSession(await teamRequest('session'));
-    });
   };
   const save = e => {
     e.preventDefault();
@@ -120,17 +112,15 @@ export default function TeamAdmin() {
     }
   };
   const visible = members.filter(m => (department === 'all' || m.department === department) && `${m.name} ${m.title}`.toLowerCase().includes(query.toLowerCase())).sort((a, b) => Number(a.order) - Number(b.order));
+  if (!session?.authenticated) return <AdminLogin session={session} error={error} onAuthenticated={setSession} initialSection="team" />;
   return <main className="team-admin" data-theme={theme}>
-    <header className="ta-header"><Link to="/" className="ta-brand">P<span>ANTISS</span><small>Workspace</small></Link><div className="ta-header-actions"><button className="ta-button ta-quiet" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>{theme === 'light' ? 'Dark' : 'Light'} mode</button><Link className="ta-button ta-quiet" to="/whoweare/team">View website <ArrowUpRight size={16} /></Link>{session?.authenticated && <button className="ta-icon" aria-label="Sign out" disabled={busy} onClick={() => run(async () => {
-          await teamRequest('logout', {});
-          setSession(s => ({
-            ...s,
-            authenticated: false
-          }));
-          setMembers([]);
-        })}><LogOut size={18} /></button>}</div></header>
+    <AdminHeader theme={theme} onThemeChange={() => setTheme(t => t === 'light' ? 'dark' : 'light')} publicPath={"/whoweare/team"} busy={busy} onSignOut={() => run(async () => {
+      await teamRequest('logout', {});
+      setSession(s => ({ ...s, authenticated: false }));
+      setMembers([]);
+    })} />
     <AdminNav />
-    {!session?.authenticated ? <div className="ta-login"><div className="ta-symbol"><Users size={26} /></div><p className="ta-eyebrow">PANTISS ADMIN</p><h1>Your people.<br />One place.</h1><p>Manage the people behind our impact.</p>{session === null && !error ? <p role="status">Checking access…</p> : <form onSubmit={login}><label htmlFor="admin-password">Admin password</label><input id="admin-password" type="password" autoComplete="current-password" required value={password} onChange={e => setPassword(e.target.value)} /><button className="ta-button ta-primary" disabled={busy || !session?.authConfigured}>{busy ? 'Signing in…' : 'Sign in to workspace'} <ArrowUpRight size={16} /></button></form>}{session && !session.authConfigured && <p className="ta-alert">Admin access needs server configuration. See docs/team-admin.md.</p>}{error && <p className="ta-alert" role="alert">{error}</p>}<Link className="ta-back" to="/whoweare/team"><ArrowLeft size={15} /> Back to our team</Link></div> : <div className="ta-content">
+    <div className="ta-content">
       <div className="ta-heading"><div><p className="ta-eyebrow">PEOPLE & CULTURE</p><h1>Our team<span>.</span></h1><p>A living directory of the people moving Pantiss forward.</p></div><button className="ta-button ta-primary" disabled={!session.configured || busy} onClick={() => {
           setError('');
           setEditing({
@@ -138,7 +128,7 @@ export default function TeamAdmin() {
             order: members.length + 1
           });
         }}><Plus size={18} /> Add member</button></div>
-      {!session.configured && <div className="ta-alert">Connect Google Sheets and Drive using the server settings in docs/team-admin.md. The public team directory displays an unavailable state until connected.</div>}
+      {!session.configured && <div className="ta-alert">Google content storage is not connected. Ask your website administrator to connect it before making changes.</div>}
       {error && !editing && !removing && <p className="ta-alert" role="alert">{error}</p>}{notice && <p className="ta-success" role="status"><Check size={16} />{notice}</p>}
       <div className="ta-stats">{[['Total members', members.length], ['Published', members.filter(m => m.status === 'published').length], ['Drafts', members.filter(m => m.status === 'draft').length]].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value.toString().padStart(2, '0')}</strong></div>)}<div className="ta-connection"><span className={session.configured ? 'ta-dot' : ''} /><div><strong>{session.configured ? 'Google connected' : 'Setup required'}</strong><span>Sheets directory · Drive photos</span></div></div></div>
       <section className="ta-roster" aria-label="Team directory"><div className="ta-toolbar"><div className="ta-search"><Search size={18} /><input aria-label="Search team" placeholder="Search people or roles…" value={query} onChange={e => setQuery(e.target.value)} /></div><select aria-label="Filter department" value={department} onChange={e => setDepartment(e.target.value)}><option value="all">All departments</option>{departments.map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select><button className="ta-button ta-quiet" disabled={busy} onClick={() => run(load)}>Refresh</button></div>
@@ -155,7 +145,7 @@ export default function TeamAdmin() {
           })}>{busy ? 'Importing…' : 'Import existing roster'}</button>}</div>}
         <div className="ta-table-footer">{visible.length} of {members.length} members <span>Published changes appear on the next team page load.</span></div>
       </section><p className="ta-footnote">Built around people. Managed with care.</p>
-    </div>}
+    </div>
     {(editing || removing) && <div className="ta-overlay" onClick={e => {
       if (e.target === e.currentTarget) close();
     }}><section className="ta-dialog" role="dialog" aria-modal="true" aria-labelledby="editor-title" ref={editor} tabIndex={-1} onKeyDown={trapFocus}><div className="ta-dialog-heading"><div><p className="ta-eyebrow">TEAM DIRECTORY</p><h2 id="editor-title">{removing ? 'Remove member?' : editing.id ? 'Edit team member' : 'Welcome someone new'}</h2></div><button className="ta-icon" aria-label="Close dialog" disabled={busy} onClick={close}><X size={20} /></button></div>

@@ -10,6 +10,7 @@ const DEFAULT_KEYWORDS =
 const DEFAULT_IMAGE = SITE_URL + "/logo.png";
 
 const routeMeta = {
+  "/admin/login": { title: "Admin Login | Pantiss Foundation", description: "Sign in to manage the Pantiss website." },
   "/admin/jobs": { title: "Jobs Workspace | Pantiss Foundation", description: "Manage career opportunities." },
   "/admin/tenders": { title: "Tenders Workspace | Pantiss Foundation", description: "Manage procurement notices." },
   "/admin/impact": { title: "Impact Workspace | Pantiss Foundation", description: "Manage publications and impact stories." },

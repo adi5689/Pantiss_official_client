@@ -140,7 +140,7 @@ const Footer2 = () => {
               Careers
             </Link>
             <Link
-              to="/admin/team"
+              to="/admin/login"
               className="rounded-sm hover:underline hover:text-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
             >
               Admin Login

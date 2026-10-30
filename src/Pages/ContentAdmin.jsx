@@ -1,7 +1,11 @@
+import { useAdminTheme } from '../features/admin/useAdminTheme';
+import AdminLogin from '../features/admin/AdminLogin';
+import AdminHeader from '../features/admin/AdminHeader';
+import '../features/admin/admin-workspace.css';
 import { prepareUpload } from '../features/content/upload';
 import { useCallback, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Plus, Search, ArrowUpRight, LogOut, FileText } from 'lucide-react';
+import { useParams } from 'react-router-dom';
+import { Plus, Search, FileText, BriefcaseBusiness, LayoutGrid } from 'lucide-react';
 import { collections, blankRecord, validateContent, isOpen } from '../features/content/model';
 import { teamRequest } from '../features/team/api';
 import { imageUrl } from '../features/team/model';
@@ -25,7 +29,7 @@ export default function ContentAdmin() {
   const [editing, setEditing] = useState(null);
   const [removing, setRemoving] = useState(null);
   const [importing, setImporting] = useState(false);
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useAdminTheme();
   const request = useCallback((action, body) => teamRequest(action, body, true, resource), [resource]);
   const load = useCallback(async () => {
     const result = await request('list');
@@ -100,17 +104,16 @@ export default function ContentAdmin() {
     });
   };
   if (!config) return <main className="team-admin"><AdminNav /><p className="ta-content">Unknown content section.</p></main>;
+  if (!session?.authenticated) return <AdminLogin session={session} error={error} initialSection={resource} onAuthenticated={async next => { setSession(next); await load().catch(e => setError(e.message)); }} />;
   const visible = records.filter(r => (visibility === 'all' || r.status === visibility) && `${r.title} ${r.category || ''} ${r.location || ''}`.toLowerCase().includes(query.toLowerCase()));
+  const SectionIcon = resource === 'jobs' ? BriefcaseBusiness : resource === 'impact' ? LayoutGrid : FileText;
   const canEdit = session?.authenticated && session.configured;
   return <main className="team-admin" data-theme={theme}>
-    <header className="ta-header"><Link className="ta-brand" to="/admin/team">P<span>ANTISS</span><small>Workspace</small></Link><div className="ta-header-actions"><button className="ta-button ta-quiet" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>{theme === 'light' ? 'Dark' : 'Light'} mode</button><Link className="ta-button ta-quiet" to={config.publicPath}>View page <ArrowUpRight size={16} /></Link>{session?.authenticated && <button className="ta-icon" aria-label="Sign out" onClick={() => run(async () => {
-          await teamRequest('logout', {});
-          setSession(s => ({
-            ...s,
-            authenticated: false
-          }));
-          setRecords([]);
-        })}><LogOut size={18} /></button>}</div></header>
+    <AdminHeader theme={theme} onThemeChange={() => setTheme(t => t === 'light' ? 'dark' : 'light')} publicPath={config.publicPath} busy={busy} onSignOut={() => run(async () => {
+      await teamRequest('logout', {});
+      setSession(s => ({ ...s, authenticated: false }));
+      setRecords([]);
+    })} />
     <AdminNav />
     <div className="ta-content">
       <div className="ta-heading"><div><p className="ta-eyebrow">WEBSITE CONTENT</p><h1>{config.title}<span>.</span></h1><p>{resource === 'jobs' ? 'Connect good people with meaningful work.' : resource === 'tenders' ? 'Clear opportunities. Transparent procurement.' : 'The stories, evidence and ideas behind our work.'}</p></div>{canEdit && <button className="ta-button ta-primary" disabled={busy || loading} onClick={() => {
@@ -122,10 +125,10 @@ export default function ContentAdmin() {
         }}><Plus size={18} /> Add {config.singular}</button>}</div>
       {error && !editing && !removing && !importing && <p className="ta-alert" role="alert">{error}</p>}
       {notice && <p className="ta-success" role="status">{notice}</p>}
-      {loading ? <p role="status">Loading workspace…</p> : !session?.authenticated ? <div className="ta-empty"><h2>Sign in to manage content</h2><p>Use your existing team admin password for every section.</p><Link className="ta-button ta-primary" to="/admin/team">Sign in</Link></div> : !session.configured ? <p className="ta-alert">Google connection is not configured. See docs/team-admin.md.</p> : <>
+      {loading ? <p role="status">Loading workspace…</p> : !session.configured ? <p className="ta-alert">Google content storage is not connected. Ask your website administrator to connect it before making changes.</p> : <>
       <div className="ta-stats">{[['Total items', records.length], ['Published', records.filter(r => r.status === 'published').length], ['Drafts', records.filter(r => r.status === 'draft').length]].map(([label, n]) => <div key={label}><span>{label}</span><strong>{String(n).padStart(2, '0')}</strong></div>)}<div className="ta-connection"><div><strong>Google Sheets & Drive</strong><span>{config.tab} worksheet · Shared media folder</span></div></div></div>
       <section className="ta-roster" aria-label={config.title}><div className="ta-toolbar"><div className="ta-search"><Search size={18} /><input aria-label="Search content" placeholder="Search titles, categories or locations…" value={query} onChange={e => setQuery(e.target.value)} /></div><select aria-label="Filter visibility" value={visibility} onChange={e => setVisibility(e.target.value)}><option value="all">All visibility</option><option value="published">Published</option><option value="draft">Drafts</option></select><button className="ta-button ta-quiet" disabled={busy} onClick={() => run(load)}>Refresh</button></div>
-      {visible.length ? <div className="ta-table-wrap"><table><thead><tr><th>Title</th><th>Category / location</th><th>Visibility</th>{resource === 'tenders' && <th>Tender status</th>}<th>Order</th><th>Actions</th></tr></thead><tbody>{visible.map(record => <tr key={record.id}><td><strong>{record.title}</strong><small>{record.deadline ? `Deadline: ${record.deadline}` : record.date}</small></td><td>{record.category || record.location}</td><td><span className={`ta-badge ${record.status}`}>{record.status}</span></td>{resource === 'tenders' && <td><button type="button" role="switch" aria-checked={record.tenderStatus === 'open'} aria-label={`Tender status: ${record.title}`} disabled={busy} onClick={() => toggleTenderStatus(record)} className="tender-status-toggle"><span className="tender-switch-track" aria-hidden="true"><span /></span><span>{record.tenderStatus === 'open' ? 'Open' : 'Closed'}</span></button>{!isOpen({ ...record, tenderStatus: 'open' }) && <small>Deadline passed — edit to reopen</small>}</td>}<td>{record.order}</td><td><div className="ta-row-actions"><button className="ta-button ta-quiet" disabled={busy} onClick={() => {
+      {visible.length ? <div className="ta-table-wrap"><table><thead><tr><th>Title</th><th>Category / location</th><th>Visibility</th>{resource === 'tenders' && <th>Tender status</th>}<th>Order</th><th>Actions</th></tr></thead><tbody>{visible.map(record => <tr key={record.id}><td><div className="admin-record-title"><span className="admin-record-icon">{record.image ? <img src={imageUrl(record.image)} alt="" loading="lazy"/> : <SectionIcon size={18} aria-hidden="true"/>}</span><div><strong>{record.title}</strong><small>{record.deadline ? `Deadline: ${record.deadline}` : record.date || config.singular}</small></div></div></td><td>{record.category || record.location}</td><td><span className={`ta-badge ${record.status}`}>{record.status}</span></td>{resource === 'tenders' && <td><button type="button" role="switch" aria-checked={record.tenderStatus === 'open'} aria-label={`Tender status: ${record.title}`} disabled={busy} onClick={() => toggleTenderStatus(record)} className="tender-status-toggle"><span className="tender-switch-track" aria-hidden="true"><span /></span><span>{record.tenderStatus === 'open' ? 'Open' : 'Closed'}</span></button>{!isOpen({ ...record, tenderStatus: 'open' }) && <small>Deadline passed — edit to reopen</small>}</td>}<td>{record.order}</td><td><div className="ta-row-actions"><button className="ta-button ta-quiet" disabled={busy} onClick={() => {
                         setError('');
                         setEditing(record);
                       }}>Edit<span className="ta-sr"> {record.title}</span></button><button className="ta-button ta-quiet ta-danger" disabled={busy} onClick={() => {
@@ -141,7 +144,7 @@ export default function ContentAdmin() {
     {editing && <ContentDialog title={editing.id ? `Edit ${config.singular}` : `New ${config.singular}`} busy={busy} onClose={() => {
       setEditing(null);
       setError('');
-    }}>{error && <p className="ta-alert" role="alert">{error}</p>}<form onSubmit={save}><fieldset className="ta-fields" disabled={busy}>{config.fields.map(field => <label key={field.key}>{field.label}{field.required ? ' *' : ''}
+    }}>{error && <p className="ta-alert" role="alert">{error}</p>}<form onSubmit={save}><fieldset className="ta-fields content-fields" disabled={busy}>{config.fields.map(field => <label className={`content-field content-field-${field.type}`} key={field.key}>{field.label}{field.required ? ' *' : ''}
       {field.type === 'select' ? <select required={field.required} value={editing[field.key] || ''} onChange={e => setEditing({
               ...editing,
               [field.key]: e.target.value

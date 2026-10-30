@@ -12,3 +12,5 @@ Currently, two official plugins are available:
 The team directory supports Google Sheets records and Google Drive photos through `/admin/team`. Setup and deployment instructions: [docs/team-admin.md](docs/team-admin.md).
 
 Jobs, tenders and Our Impact are managed in the same workspace and Google spreadsheet. See [docs/content-admin.md](docs/content-admin.md) for admin routes, publishing, deadlines, uploads and optional migration. Teams reads exclusively from the connected Sheet.
+
+The shared admin login is `/admin/login`, with section selection for Team, Jobs, Tenders and Our Impact. Design review artifacts and the ECC evidence record are in `docs/design/admin-login/`.

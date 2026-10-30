@@ -68,6 +68,7 @@ import Jajpur from "./Pages/WhereWeWorkPages/OdishaDistricts/Jajpur";
 import ModelMiningVillagesSolution from "./Pages/Solutions/ModelMiningVillagesSolution";
 import RepurposedMiningVillagesSolution from "./Pages/Solutions/RepurposedMiningVillagesSolution";
 
+const AdminLogin = lazy(() => import("./features/admin/AdminLogin"));
 const ContentAdmin = lazy(() => import("./Pages/ContentAdmin"));
 const TeamAdmin = lazy(() => import("./Pages/TeamAdmin"));
 
@@ -75,7 +76,7 @@ function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
-  const hideHeaderFooter = (location.pathname === "/sdg-pantiss" || location.pathname.startsWith("/admin/"));
+  const hideHeaderFooter = (location.pathname === "/sdg-pantiss" || (location.pathname === "/admin" || location.pathname.startsWith("/admin/")));
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -107,7 +108,8 @@ function App() {
       <SeoManager />
       {!hideHeaderFooter && <Header />}
       <Routes>
-        <Route path="/admin" element={<Navigate to="/admin/team" replace />} />
+        <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+        <Route path="/admin/login" element={<Suspense fallback={<Loader />}><AdminLogin /></Suspense>} />
         <Route path="/admin/:resource" element={<Suspense fallback={<Loader />}><ContentAdmin /></Suspense>} />
         <Route path="/admin/team" element={<Suspense fallback={<Loader />}><TeamAdmin /></Suspense>} />
         <Route path="/" element={<HomePage />} />

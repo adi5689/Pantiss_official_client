@@ -1,0 +1,533 @@
+/* Shared layout for every authenticated content section. */
+.team-admin:not(.admin-login) {
+  display: grid;
+  grid-template-columns: 222px minmax(0,1fr);
+  grid-template-rows: 86px 1fr;
+  align-items: start;
+  --admin-subtle: #f1f3f5;
+  --admin-shadow: 0 2px 6px #172b4d03;
+}
+.team-admin[data-theme=dark]:not(.admin-login) {
+  --admin-subtle: #22272e;
+  --admin-shadow: none;
+}
+.team-admin:not(.admin-login)>.ta-header {
+  grid-column: 1/-1;
+  grid-row: 1;
+  height: 86px;
+  padding: 0 30px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+.team-admin:not(.admin-login)>.content-admin-nav {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 30px 16px 22px;
+  position: sticky;
+  top: 86px;
+  height: calc(100dvh - 86px);
+  border-right: 1px solid var(--ta-border);
+  border-bottom: 0;
+  overflow: auto;
+}
+.admin-nav-label {
+  margin: 0 14px 18px;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 1.8px;
+  color: var(--ta-muted);
+}
+.admin-nav-items {
+  display: grid;
+  gap: 7px;
+}
+.content-admin-nav .admin-nav-items a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.content-admin-nav .admin-nav-items a:hover {
+  color: var(--ta-text);
+  background: var(--ta-bg);
+}
+.content-admin-nav .admin-nav-items a.active {
+  color: var(--ta-accent);
+  background: var(--ta-soft);
+  font-weight: 600;
+}
+.admin-nav-active-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-left: auto;
+  opacity: 0;
+}
+.active .admin-nav-active-dot {
+  opacity: 1;
+}
+.admin-nav-bottom {
+  margin-top: auto;
+  padding-top: 40px;
+}
+.content-admin-nav .admin-nav-bottom>a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  padding: 12px 14px;
+}
+.admin-nav-bottom>div {
+  border-top: 1px solid var(--ta-border);
+  padding: 22px 14px 0;
+  margin-top: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: var(--ta-muted);
+  font-size: 11px;
+}
+.admin-nav-bottom small {
+  display: block;
+  font-size: 10px;
+  margin-top: 6px;
+}
+.admin-user-role {
+  font-size: 11px;
+  color: var(--ta-muted);
+  padding: 0 12px 0 18px;
+  border-left: 1px solid var(--ta-border);
+}
+.team-admin:not(.admin-login) .ta-header .admin-brand>span {
+  font-size: 11px;
+}
+.team-admin:not(.admin-login)>.ta-content {
+  grid-column: 2;
+  grid-row: 2;
+  width: 100%;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 44px 38px 24px;
+  min-width: 0;
+}
+.team-admin:not(.admin-login) .ta-heading {
+  margin-bottom: 30px;
+  align-items: center;
+}
+.team-admin:not(.admin-login) .ta-heading h1 {
+  font-size: 35px;
+  font-weight: 550;
+  letter-spacing: -1.3px;
+  margin-bottom: 10px;
+}
+.team-admin:not(.admin-login) .ta-heading h1>span {
+  color: var(--ta-accent);
+}
+.team-admin:not(.admin-login) .ta-heading .ta-eyebrow {
+  font-size: 9px;
+  margin-bottom: 12px;
+}
+.team-admin:not(.admin-login) .ta-heading p:last-child {
+  font-size: 12px;
+  margin: 0;
+}
+.team-admin:not(.admin-login) .ta-primary {
+  box-shadow: var(--admin-shadow);
+  min-height: 42px;
+  padding-inline: 17px;
+  font-size: 12px;
+}
+.team-admin:not(.admin-login) .ta-stats {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  gap: 14px;
+  margin-bottom: 28px;
+  grid-template-columns: repeat(3,minmax(0,1fr)) minmax(200px,1.4fr);
+}
+.team-admin:not(.admin-login) .ta-stats>div {
+  padding: 20px 22px;
+  background: var(--ta-surface);
+  border: 1px solid var(--ta-border);
+  border-radius: 11px;
+  box-shadow: var(--admin-shadow);
+}
+.team-admin:not(.admin-login) .ta-stats span {
+  font-size: 11px;
+}
+.team-admin:not(.admin-login) .ta-stats strong {
+  font-size: 28px;
+  margin-top: 10px;
+  font-weight: 550;
+}
+.team-admin:not(.admin-login) .ta-stats .ta-connection {
+  margin: 0;
+  gap: 10px;
+}
+.team-admin:not(.admin-login) .ta-stats .ta-connection strong {
+  font-size: 12px;
+  letter-spacing: 0;
+  margin: 0 0 8px;
+}
+.team-admin:not(.admin-login) .ta-stats .ta-connection span {
+  font-size: 10px;
+  line-height: 1.7;
+}
+.team-admin:not(.admin-login) .ta-roster {
+  border-radius: 12px;
+  box-shadow: var(--admin-shadow);
+}
+.team-admin:not(.admin-login) .ta-toolbar {
+  padding: 18px 20px;
+  gap: 12px;
+}
+.team-admin:not(.admin-login) .ta-search {
+  background: var(--ta-bg);
+  border: 1px solid var(--ta-border);
+  border-radius: 7px;
+  padding-left: 12px;
+  max-width: 450px;
+}
+.team-admin:not(.admin-login) .ta-search input {
+  padding: 10px 10px 10px 0;
+  width: 100%;
+  max-width: none;
+  font-size: 12px;
+}
+.team-admin:not(.admin-login) .ta-toolbar select {
+  font-size: 11px;
+  margin-left: auto;
+  padding: 10px 12px;
+}
+.team-admin:not(.admin-login) .ta-toolbar>.ta-button {
+  font-size: 11px;
+  border-color: var(--ta-border);
+  background: var(--ta-surface);
+}
+.team-admin:not(.admin-login) .ta-roster th {
+  font-size: 10px;
+  padding: 13px 20px;
+  font-weight: 600;
+  background: var(--ta-bg);
+  color: var(--ta-muted);
+}
+.team-admin:not(.admin-login) .ta-roster td {
+  padding: 18px 20px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.team-admin:not(.admin-login) .ta-roster tbody tr {
+  transition: background .15s;
+}
+.team-admin:not(.admin-login) .ta-roster tbody tr:hover {
+  background: var(--ta-bg);
+}
+.team-admin:not(.admin-login) .ta-roster td>strong,.admin-record-title strong {
+  display: block;
+  font-weight: 550;
+  font-size: 12px;
+  max-width: 340px;
+}
+.admin-record-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 230px;
+}
+.admin-record-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 42px;
+  border: 1px solid var(--ta-border);
+  border-radius: 7px;
+  flex-shrink: 0;
+  color: var(--ta-muted);
+  background: var(--ta-bg);
+  overflow: hidden;
+}
+.admin-record-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.team-admin:not(.admin-login) .ta-roster td small {
+  font-size: 10px;
+  line-height: 1.6;
+}
+.team-admin:not(.admin-login) .ta-badge {
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 10px;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  text-transform: capitalize;
+}
+.team-admin:not(.admin-login) .ta-badge:before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+}
+.team-admin:not(.admin-login) .ta-row-actions {
+  gap: 2px;
+}
+.team-admin:not(.admin-login) .ta-row-actions .ta-button {
+  font-size: 10px;
+  padding: 7px 9px;
+  min-height: 34px;
+}
+.team-admin:not(.admin-login) .ta-table-footer {
+  font-size: 10px;
+  padding: 15px 20px;
+}
+.team-admin:not(.admin-login) .ta-footnote {
+  font-size: 10px;
+  margin-top: 24px;
+}
+.team-admin:not(.admin-login) .ta-dialog {
+  width: 720px;
+  border-radius: 16px;
+}
+.content-fields {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+}
+.content-field-textarea,.content-field-image,.content-field-document {
+  grid-column: 1/-1;
+}
+.team-admin:not(.admin-login) .content-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  max-height: 88dvh;
+}
+.team-admin:not(.admin-login) .content-dialog>.ta-dialog-heading {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 23px 26px;
+  border-bottom: 1px solid var(--ta-border);
+  align-items: center;
+}
+.team-admin:not(.admin-login) .content-dialog h2 {
+  font-size: 22px;
+}
+.team-admin:not(.admin-login) .content-dialog>form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+.team-admin:not(.admin-login) .content-dialog .ta-fields {
+  overflow-y: auto;
+  padding: 24px 26px;
+  min-height: 0;
+}
+.team-admin:not(.admin-login) .content-dialog .ta-dialog-actions {
+  flex-shrink: 0;
+  padding: 18px 26px;
+  margin: 0;
+  background: var(--ta-surface);
+}
+.team-admin:not(.admin-login) .content-dialog .ta-hint {
+  margin: 0;
+  padding: 12px 26px;
+  border-radius: 0;
+  flex-shrink: 0;
+}
+.team-admin:not(.admin-login) .content-dialog>.ta-alert,.team-admin:not(.admin-login) .content-dialog>p {
+  margin: 20px 26px;
+  flex-shrink: 0;
+}
+@media(min-width:1800px) {
+  .team-admin:not(.admin-login)>.ta-content {
+    padding-top: 55px;
+  }
+}
+@media(max-width:1100px) {
+  .team-admin:not(.admin-login) {
+    grid-template-columns: 190px minmax(0,1fr);
+  }
+  .team-admin:not(.admin-login)>.ta-content {
+    padding: 32px 24px;
+  }
+  .team-admin:not(.admin-login) .ta-stats {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+  .team-admin:not(.admin-login) .ta-stats .ta-connection {
+    grid-column: 1/-1;
+    padding: 14px 20px!important;
+    flex-direction: row;
+  }
+  .ta-connection>div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .team-admin:not(.admin-login) .ta-stats .ta-connection strong {
+    margin: 0;
+  }
+  .admin-user-role {
+    display: none;
+  }
+}
+@media(max-width:760px) {
+  .team-admin:not(.admin-login) {
+    display: block;
+  }
+  .team-admin:not(.admin-login)>.ta-header {
+    height: 76px;
+    padding: 0 20px;
+  }
+  .team-admin:not(.admin-login)>.content-admin-nav {
+    position: sticky;
+    top: 76px;
+    height: auto;
+    display: block;
+    padding: 10px 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--ta-border);
+    z-index: 20;
+  }
+  .admin-nav-label,.admin-nav-bottom {
+    display: none;
+  }
+  .admin-nav-items {
+    display: flex;
+    gap: 6px;
+  }
+  .content-admin-nav .admin-nav-items a {
+    padding: 10px 12px;
+    gap: 8px;
+    font-size: 11px;
+  }
+  .admin-nav-active-dot {
+    display: none;
+  }
+  .content-admin-nav .admin-nav-items svg {
+    width: 15px;
+  }
+  .team-admin:not(.admin-login)>.ta-content {
+    padding: 28px 20px 20px;
+  }
+  .team-admin:not(.admin-login) .ta-heading h1 {
+    font-size: 30px;
+  }
+  .team-admin:not(.admin-login) .ta-heading p:last-child {
+    font-size: 12px;
+  }
+  .team-admin:not(.admin-login) .ta-toolbar {
+    flex-wrap: wrap;
+    padding: 16px;
+  }
+  .team-admin:not(.admin-login) .ta-search {
+    flex-basis: 100%;
+    max-width: none;
+  }
+  .team-admin:not(.admin-login) .ta-toolbar select {
+    flex: 1;
+    margin-left: 0;
+  }
+}
+@media(max-width:500px) {
+  .team-admin:not(.admin-login) .ta-header-actions {
+    gap: 4px;
+  }
+  .admin-view-page {
+    font-size: 10px;
+    padding: 8px;
+  }
+  .team-admin:not(.admin-login) .ta-header .admin-brand img {
+    width: 96px;
+    height: 49px;
+  }
+  .team-admin:not(.admin-login) .ta-stats {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .team-admin:not(.admin-login) .ta-stats>div {
+    padding: 14px 12px;
+  }
+  .team-admin:not(.admin-login) .ta-stats strong {
+    font-size: 24px;
+  }
+  .team-admin:not(.admin-login) .ta-stats span {
+    font-size: 10px;
+  }
+  .team-admin:not(.admin-login) .ta-heading>.ta-button {
+    padding: 9px 11px;
+    font-size: 10px;
+  }
+  .team-admin:not(.admin-login) .ta-heading {
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .team-admin:not(.admin-login) .ta-heading>div {
+    max-width: 220px;
+  }
+  .team-admin:not(.admin-login) .ta-stats .ta-connection>div {
+    display: block;
+  }
+  .team-admin:not(.admin-login) .ta-stats .ta-connection strong {
+    margin-bottom: 3px;
+  }
+  .content-fields {
+    grid-template-columns: minmax(0,1fr);
+  }
+  .content-field {
+    grid-column: 1!important;
+  }
+  .team-admin:not(.admin-login) .content-dialog>.ta-dialog-heading {
+    padding: 18px;
+  }
+  .team-admin:not(.admin-login) .content-dialog .ta-fields {
+    padding: 20px 18px;
+  }
+  .team-admin:not(.admin-login) .content-dialog .ta-dialog-actions {
+    padding: 16px 18px;
+  }
+}
+.team-admin:not(.admin-login) {
+  --ta-muted: #626b76;
+}
+.team-admin[data-theme=dark]:not(.admin-login) {
+  --ta-muted: #adb6c1;
+}
+@media (max-width:760px) {
+  .team-admin:not(.admin-login) .ta-icon {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .content-admin-nav .admin-nav-items a {
+    min-height: 44px;
+  }
+  .team-admin:not(.admin-login) .ta-row-actions .ta-button {
+    min-height: 44px;
+  }
+}
+.team-admin:not(.admin-login) .ta-icon {
+  min-width: 44px;
+  min-height: 44px;
+}
+.team-admin:not(.admin-login) input,.team-admin:not(.admin-login) select {
+  min-height: 44px;
+}
+.team-admin:not(.admin-login) .ta-primary {
+  min-height: 44px;
+}
+@media(max-width:760px) {
+  .team-admin:not(.admin-login) .ta-toolbar>.ta-button {
+    min-height: 44px;
+  }
+}

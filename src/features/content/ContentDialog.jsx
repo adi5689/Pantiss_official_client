@@ -10,8 +10,12 @@ export default function ContentDialog({
   const ref = useRef(null);
   useEffect(() => {
     const dialog = ref.current;
+    const previousFocus = document.activeElement;
     dialog.showModal();
-    return () => dialog.close();
+    return () => {
+      dialog.close();
+      if (previousFocus instanceof HTMLElement && previousFocus.isConnected) previousFocus.focus();
+    };
   }, []);
   return <dialog ref={ref} className="ta-dialog content-dialog" aria-labelledby="content-dialog-title" onCancel={e => {
     e.preventDefault();
